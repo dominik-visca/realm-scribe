@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                        {{ __('Projects') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('chatbox')" :active="request()->routeIs('chatbox')">
                         {{ __('Chatbox') }}
                     </x-nav-link>
@@ -72,6 +75,9 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                {{ __('Projects') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('chatbox')" :active="request()->routeIs('chatbox')">
                 {{ __('Chatbox') }}

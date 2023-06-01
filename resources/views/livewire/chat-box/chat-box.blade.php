@@ -2,7 +2,7 @@
     <div class="flex flex-col space-y-4 p-4">
         @foreach ($messages as $message)
             <div
-                class="flex rounded-lg p-4 @if ($message['role'] === 'assistant') bg-green-200 flex-reverse @else bg-blue-200 @endif ">
+                class="text-gray-200 dark:text-gray-600 flex rounded-lg p-4 @if ($message['role'] === 'assistant') bg-green-200 flex-reverse @else bg-blue-200 @endif ">
                 <div class="ml-4">
                     <div class="text-lg">
                         @if ($message['role'] === 'assistant')
@@ -59,24 +59,25 @@
         </form>
     </div>
     <div class="flex mt-2 space-x-4">
-        <div>
+        {{-- <div>
             <label for="chatBoxModel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Model</label>
-            <select wire:model="chatBoxModel"
+            <select wire:change="changeChatBoxModel($event.target.value)"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option>Choose am OpenAI Model</option>
-                @foreach ($availableModels as $availableModel)
-                    <option {{ $availableModel == $chatBoxModel ? 'selected' : '' }} value="{{ $availableModel }}">
-                        {{ $availableModel }}</option>
+                <option disabled selected>Choose an OpenAI Model</option>
+                @foreach ($availableModels as $chatBoxModelKey => $chatBoxModelValue)
+                <option value="{{ $chatBoxModelKey }}">
+                    {{ $chatBoxModelValue["label"] }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
+
         <div>
             <label for="promptList" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prompt
                 List</label>
             <select data-popover-target="popover-default" wire:model="message"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option value=''>Choose a Prompt</option>
+                <option selected value=''>Choose a Prompt</option>
                 @foreach ($availableRoles as $availableRoleKey => $availableRoleValue)
                     <option value="{{ $availableRoleValue }}">
                         Act as {{ $availableRoleKey }}</option>
@@ -98,13 +99,6 @@
             <input wire:model="chatBoxTemperature" type="number" step="0.1" min="0" max="1"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="0.0 - 1.0">
-        </div>
-        <div>
-            <label for="chatBoxMaxTokens"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">MaxTokens</label>
-            <input wire:model="chatBoxMaxTokens" type="number" step="1" min="1" max="100"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="1 - 4096">
         </div>
 
     </div>
